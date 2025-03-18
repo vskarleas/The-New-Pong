@@ -15,7 +15,7 @@ install_dependencies() {
         fi
         
         echo -e "${PURPLE}Checking SDL2 dependencies...${NORMAL}"
-        local brew_packages=("sdl2" "sdl2_ttf" "sdl2_mixer" "sdl2_image")
+        local brew_packages=("sdl2" "sdl2_ttf" "sdl2_mixer" "sdl2_image" "sdl2_net")
         local missing_packages=()
 
         for package in "${brew_packages[@]}"; do
@@ -31,7 +31,7 @@ install_dependencies() {
     elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
         # Linux
         echo -e "${PURPLE}Checking SDL2 dependencies...${NORMAL}"
-        local apt_packages=("libsdl2-dev" "libsdl2-ttf-dev" "libsdl2-mixer-dev" "libsdl2-image-dev")
+        local apt_packages=("libsdl2-dev" "libsdl2-ttf-dev" "libsdl2-mixer-dev" "libsdl2-image-dev" "libsdl2-net-dev")
         
         if ! command -v apt-get &> /dev/null; then
             echo -e "${RED}Error: apt-get not found. Please install SDL2 dependencies manually.${NORMAL}"
