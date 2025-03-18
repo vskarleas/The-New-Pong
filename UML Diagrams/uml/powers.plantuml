@@ -1,0 +1,65 @@
+@startuml Power Classes
+
+' Base classes that interact with powers
+class Paddle {
+  ' Paddle attributes and methods would go here
+}
+
+class BallBase {
+  ' Ball attributes and methods would go here
+}
+
+' Base Power class
+class Power {
+  # float x
+  # float y
+  # bool play
+  # int width, height
+  # float speed
+  # float duration_effect
+  # bool effect_is_active
+  # SDL_Color color
+  # bool is_active
+  
+  + Power(int screen_width, int screen_height)
+  + virtual void update(float time, Paddle *racket1, Paddle *racket2, SDL_Renderer *renderer, BallBase *ball)
+  + virtual void render(SDL_Renderer *renderer)
+  + bool collision(BallBase *ball_type) const
+  + virtual void reset(int screen_width)
+  + void set_is_active(bool active)
+  + void set_effect_is_active(bool active)
+}
+
+' Derived power classes
+class InvisiblePower {
+  - float repeat
+  - bool initialisation
+  
+  + InvisiblePower(int screen_width, int screen_height)
+  + void update(float time, BallBase *Ball, SDL_Renderer *renderer)
+  + void render(SDL_Renderer *renderer) override
+  + void reset(int screen_width) override
+  + void set_initialisation(bool init)
+}
+
+class InversiblePower {
+  - bool inverse_paddle
+  - float repeat
+  
+  + InversiblePower(int screen_width, int screen_height)
+  + void update(float time, Paddle* racket1, Paddle* racket2, SDL_Renderer* renderer, BallBase *ball) override
+  + void render(SDL_Renderer* renderer) override
+  + void reset(int screen_width) override
+}
+
+' Show inheritance relationships
+Power <|-- InvisiblePower
+Power <|-- InversiblePower
+
+' Show associations/dependencies
+Power --> BallBase : uses
+Power --> Paddle : affects
+InvisiblePower --> BallBase : affects visibility
+InversiblePower --> Paddle : inverts controls
+
+@enduml

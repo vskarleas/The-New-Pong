@@ -1,0 +1,59 @@
+@startuml Ball Hierarchy
+
+abstract class BallBase {
+  # pos_x: float
+  # pos_y: float
+  # vel_x: float
+  # vel_y: float
+  # ball_size: float {const}
+  # color: SDL_Color
+  # game_mode: int = -1
+  
+  + BallBase(size: float = 35.0f)
+  + {abstract} render_object(renderer: SDL_Renderer*): void
+  + update(travel_time: float, paddle1: Paddle*, paddle2: Paddle*, player1: User*, player2: User*): void
+  + reset(): void
+  + random_direction_angle(): void
+  + set_position(x: float, y: float): void
+  + set_velocity(velX: float, velY: float): void
+  + set_color(new_color: const SDL_Color&): void
+  + set_game_mode(mode: int): void
+  + boundaries(): SDL_Rect {virtual}
+  + get_vel_x(): float {const}
+  + get_vel_y(): float {const}
+  + get_pos_x(): float {const}
+  + get_pos_y(): float {const}
+  + get_color(): SDL_Color {const}
+  + get_game_mode(): int {const}
+  + ~BallBase(): virtual
+}
+
+class ClassicBall {
+  - ball_texture: SDL_Texture* = nullptr
+  + ClassicBall()
+  + render_object(renderer: SDL_Renderer*): void
+}
+
+class SquareBall {
+  + SquareBall()
+  + render_object(renderer: SDL_Renderer*): void
+}
+
+class TriangleBall {
+  + TriangleBall()
+  + render_object(renderer: SDL_Renderer*): void
+}
+
+BallBase <|-- ClassicBall
+BallBase <|-- SquareBall
+BallBase <|-- TriangleBall
+
+note "ball_size = 24.0f or ball_size = 15.0f (shape case)" as N1
+note "ball_size = 20.0f" as N2
+note "ball_size = 20.0f" as N3
+
+ClassicBall .. N1
+SquareBall .. N2
+TriangleBall .. N3
+
+@enduml

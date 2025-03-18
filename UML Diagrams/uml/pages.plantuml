@@ -1,0 +1,157 @@
+@startuml Page Classes
+
+' Common attributes for all pages
+abstract class "Page Base" {
+  # SDL_Renderer* renderer
+  # TTF_Font* police
+  # SDL_Texture* texture_menu
+  + render_object()
+  + action_handler()
+}
+
+' page_2b_1t: Notice screen with 2 buttons and 1 title
+class page_2b_1t {
+  - SDL_Rect button_lets_go
+  - SDL_Rect button_back
+  - bool next_view
+  - bool go_back
+  - int notice_id
+  + page_2b_1t(SDL_Renderer*, TTF_Font*)
+  + ~page_2b_1t()
+  + bool get_next_view()
+  + bool get_go_back()
+  + int get_notice_id()
+  + void set_notice_id(int)
+  + void render_object()
+  + bool action_handler(const SDL_Event&)
+}
+
+note bottom of page_2b_1t
+  Notice screen with 2 buttons and 1 title
+  Used for instructions and notifications
+end note
+
+' page_3b_1t: Middle menu with 3 buttons and 1 title
+class page_3b_1t {
+  - int selected_button
+  - int mode_type
+  - SDL_Rect button_1
+  - SDL_Rect button_2
+  - SDL_Rect button_3
+  + page_3b_1t(SDL_Renderer*, TTF_Font*)
+  + ~page_3b_1t()
+  + int get_selected_option()
+  + bool action_handler(const SDL_Event&)
+  + void render_object()
+  + int get_mode_type()
+  + void set_mode_type(int)
+}
+
+note bottom of page_3b_1t
+  Middle menu with 3 buttons and 1 title
+  Used for ball type or AI difficulty selection
+end note
+
+' page_4b_1t: Mode selection menu with 4 buttons and 1 title
+class page_4b_1t {
+  - int mode_id
+  - bool exit_game
+  - SDL_Rect button_ai_mode
+  - SDL_Rect button_two_players_mode
+  - SDL_Rect button_storytime_mode
+  - SDL_Rect button_fun_mode
+  - SDL_Rect button_exit
+  + page_4b_1t(SDL_Renderer*, TTF_Font*)
+  + ~page_4b_1t()
+  + bool action_handler(const SDL_Event&)
+  + void render_object()
+  + bool get_exit_game()
+  + int get_mode_id()
+}
+
+note bottom of page_4b_1t
+  Mode selection menu with 4 buttons and 1 title
+  For selecting between AI, Two players,
+  Storytime, or Fun mode
+end note
+
+' page_3b_0t: Main menu with 3 buttons and no title
+class page_3b_0t {
+  - bool start_new_game
+  - bool exit_mode
+  - bool continue_game
+  - bool saved_file_exists
+  - SDL_Rect button_start
+  - SDL_Rect button_exit
+  - SDL_Rect button_continue
+  + page_3b_0t(SDL_Renderer*, TTF_Font*)
+  + ~page_3b_0t()
+  + bool action_handler(const SDL_Event&)
+  + void render_object(int, const std::string&, int)
+  + bool get_started()
+  + bool get_exit_mode()
+  + bool get_saved_file_exists()
+  + bool get_continue_game()
+  + void set_saved_file_exists()
+}
+
+note bottom of page_3b_0t
+  Main menu with 3 buttons and no title
+  For starting a new game, continuing a saved game,
+  or exiting to mode selection
+end note
+
+' page_3b: Pause menu with 3 buttons
+class page_3b {
+  - bool mResume
+  - bool mSave
+  - bool mExit
+  - int selected_button
+  - int mode_type
+  - SDL_Rect mResumeButton
+  - SDL_Rect mSaveButton
+  - SDL_Rect button_exit
+  + page_3b(SDL_Renderer*, TTF_Font*)
+  + ~page_3b()
+  + void render_object()
+  + bool action_handler(const SDL_Event&)
+  + bool ShouldResume()
+  + bool ShouldSave()
+  + bool get_exit_mode()
+  + void set_mode_type(int)
+  + int get_mode_type()
+}
+
+note bottom of page_3b
+  Pause menu with 3 buttons
+  All buttons centered in the middle of the screen
+  Used during gameplay for resume/save/exit options
+end note
+
+' GameOver class - not a "page_" but serves similar purpose
+class GameOver {
+  - SDL_Rect button_back
+  - bool go_back
+  - std::string winner_name
+  + GameOver(SDL_Renderer*, TTF_Font*)
+  + ~GameOver()
+  + bool action_handler(const SDL_Event&)
+  + bool get_go_back()
+  + void set_winner(const std::string&)
+  + void render_object()
+}
+
+note bottom of GameOver
+  Game over screen showing winner
+  and providing return to menu option
+end note
+
+' Show inheritance (conceptual, not actual in code)
+"Page Base" <|..|> page_2b_1t
+"Page Base" <|..|> page_3b_1t
+"Page Base" <|..|> page_4b_1t
+"Page Base" <|..|> page_3b_0t
+"Page Base" <|..|> page_3b
+"Page Base" <|..|> GameOver
+
+@enduml

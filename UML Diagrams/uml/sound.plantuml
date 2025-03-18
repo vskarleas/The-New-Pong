@@ -1,0 +1,14 @@
+@startuml SoundEffects
+
+title SoundEffects Class Diagram
+
+class SoundEffects {
+    + {static} change_music_track(music_file: Mix_Music*, fade_out_duration: int = 500, fade_in_duration: int = 500, volume: int = MIX_MAX_VOLUME / 3): void
+}
+
+note bottom of SoundEffects
+  Utility class for handling sound effects 
+  and music in the game
+end note
+
+@enduml

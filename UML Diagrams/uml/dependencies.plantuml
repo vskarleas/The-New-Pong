@@ -1,0 +1,195 @@
+@startuml Game Dependencies
+
+' Layout and styling improvements
+skinparam backgroundColor white
+skinparam packageStyle rectangle
+skinparam componentStyle uml2
+skinparam linetype ortho
+skinparam nodesep 80
+skinparam ranksep 100
+
+' Custom stereotypes for OOP concepts
+skinparam component {
+    BorderColor black
+    BackgroundColor white
+    ArrowColor black
+}
+
+' Color scheme
+skinparam package {
+    BackgroundColor<<Core>> LightYellow
+    BackgroundColor<<BallTypes>> LightGreen
+    BackgroundColor<<GameObjects>> LightBlue
+    BackgroundColor<<UIComponents>> LightPink
+    BackgroundColor<<PowerUps>> LightCoral
+    BackgroundColor<<Utilities>> LightSkyBlue
+    BackgroundColor<<GameFeatures>> LightSalmon
+}
+
+' Component stereotypes for OOP concepts
+skinparam component {
+    BackgroundColor<<abstract>> LightYellow
+    BorderColor<<abstract>> DarkOrange
+    BorderThickness<<abstract>> 2
+    
+    BackgroundColor<<functor>> LightCyan
+    BorderColor<<functor>> DarkCyan
+    BorderThickness<<functor>> 2
+    
+    BackgroundColor<<encapsulated>> White
+    BorderColor<<encapsulated>> Purple
+    BorderThickness<<encapsulated>> 2
+    
+    BackgroundColor<<lambda>> LightGray
+    BorderColor<<lambda>> DarkGray
+    BorderThickness<<lambda>> 2
+}
+
+package "Core" <<Core>> {
+    [main.cpp] as Main
+    [game.cpp] as Game <<encapsulated>>
+    [game.hpp] as GameH
+}
+
+package "Ball Types" <<BallTypes>> {
+    [ball_base.hpp] as BallBase <<abstract>>
+    [classic_ball.hpp] as ClassicBall
+    [square_ball.hpp] as SquareBall
+    [triangle_ball.hpp] as TriangleBall
+}
+
+package "Game Objects" <<GameObjects>> {
+    [paddle.hpp] as Paddle <<encapsulated>> <<lambda>>
+    [user.hpp] as User <<encapsulated>>
+}
+
+package "UI Components" <<UIComponents>> {
+    [page_3b.hpp] as Page3B
+    [page_3b_0t.hpp] as Page3B0T
+    [page_3b_1t.hpp] as Page3B1T
+    [page_4b_1t.hpp] as Page4B1T
+    [page_2b_1t.hpp] as Page2B1T
+    [game_over.hpp] as GameOver <<encapsulated>>
+    [gui.hpp] as GUI
+}
+
+package "Power-ups" <<PowerUps>> {
+    [power.hpp] as Power <<abstract>>
+    [invisible_power.hpp] as InvisiblePower
+    [inverse_power.hpp] as InversePower
+}
+
+package "Utilities" <<Utilities>> {
+    [macros.hpp] as Macros
+    [sound_effects.hpp] as SoundEffects
+    [renderers.hpp] as Renderers <<functor>>
+}
+
+package "Game Features" <<GameFeatures>> {
+    [ai.hpp] as AI <<encapsulated>>
+    [game_save.hpp] as GameSave
+    [letter.hpp] as Letter <<encapsulated>>
+    [network.hpp] as Network
+}
+
+' Different arrow styles for different relationship types
+' Main dependencies
+Main -[thickness=2]-> GameH : includes
+
+' Game dependencies
+GameH ---> Paddle : includes
+GameH ---> BallBase : includes
+GameH ---> Page3B : includes
+GameH ---> Page3B0T : includes
+GameH ---> Page3B1T : includes
+GameH ---> Page4B1T : includes
+GameH ---> Page2B1T : includes
+GameH ---> GameOver : includes
+GameH ---> AI : includes
+GameH ---> User : includes
+GameH ---> Network : includes
+GameH ---> Power : includes
+GameH ---> InvisiblePower : includes
+GameH ---> InversePower : includes
+GameH ---> GUI : includes
+GameH ---> Letter : includes
+
+Game ---> ClassicBall : includes
+Game ---> SquareBall : includes
+Game ---> TriangleBall : includes
+Game ---> GameSave : includes
+Game ---> SoundEffects : includes
+Game ---> Macros : includes
+
+' Ball hierarchy (polymorphism through inheritance)
+ClassicBall -[#green,thickness=2]-> BallBase : inherits
+SquareBall -[#green,thickness=2]-> BallBase : inherits
+TriangleBall -[#green,thickness=2]-> BallBase : inherits
+BallBase ---> User : includes
+
+' Power-up hierarchy (polymorphism through inheritance)
+InvisiblePower -[#green,thickness=2]-> Power : inherits
+InversePower -[#green,thickness=2]-> Power : inherits
+Power ---> Paddle : includes
+Power ---> BallBase : includes
+Power ---> Macros : includes
+
+' Game Object dependencies
+AI ---> Paddle : includes
+AI ---> BallBase : includes
+
+Letter ---> User : includes
+Letter ---> Macros : includes
+
+' Rendering dependencies - polymorphism through functors
+BallBase -[#blue,dashed]-> Renderers : uses
+ClassicBall -[#blue,dashed]-> Renderers : uses
+SquareBall -[#blue,dashed]-> Renderers : uses
+TriangleBall -[#blue,dashed]-> Renderers : uses
+Paddle -[#blue,dashed]-> Renderers : uses
+
+' Shared dependencies
+Game ---> Macros : includes
+BallBase -[#blue,dashed]-> Macros : uses
+Power ---> Macros : uses
+GameSave ---> Macros : uses
+
+' Note describing polymorphism
+note right of BallBase
+  **Polymorphism Example**
+  BallBase declares virtual render_object()
+  which is overridden by derived classes
+end note
+
+' Note for lambda functions
+note bottom of Paddle
+  **Lambda Functions**
+  Uses lambdas in update() method
+  for movement and boundary checks
+end note
+
+' Note for functors
+note right of Renderers
+  **Functors**
+  Contains circle_renderer, square_renderer,
+  and triangle_renderer functors that
+  overload operator()
+end note
+
+legend right
+  **Relationship Types**
+  -- Black Arrow --> : Includes
+  == Green Arrow ==> : Inherits
+  -- Blue Dashed --> : Uses
+  
+  **OOP Concepts**
+  <<abstract>> : Abstract class with virtual methods
+  <<functor>> : Class with overloaded operator()
+  <<encapsulated>> : Strong encapsulation
+  <<lambda>> : Contains lambda functions
+  
+  **Polymorphism** occurs where inheritance is used
+  with virtual method overrides
+endlegend
+
+@enduml

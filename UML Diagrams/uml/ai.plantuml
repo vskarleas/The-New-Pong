@@ -1,0 +1,21 @@
+@startuml AI Class
+
+class AI {
+  -racket: Paddle*
+  -ai_difficulty: int
+  
+  +AI(controlledPaddle: Paddle*)
+  +updateAI(ball: BallBase*, dt: float): void
+  +set_difficulty(difficulty: int): void
+}
+
+class Paddle {
+}
+
+class BallBase {
+}
+
+AI --> Paddle: controls
+AI ..> BallBase: uses
+
+@enduml

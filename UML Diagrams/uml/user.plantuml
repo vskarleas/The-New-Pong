@@ -1,0 +1,19 @@
+@startuml User Class
+
+class User {
+  - name: std::string
+  - score: int
+  - round: int
+  
+  + User(const std::string &name = "Player")
+  + void increment_score()
+  + void reset_score()
+  + int get_user_score() const
+  + void set_user_score(int _score)
+  + const std::string &get_user_name() const
+  + void set_user_name(const std::string &name)
+  + void set_round(int _round)
+  + int get_round() const
+}
+
+@enduml

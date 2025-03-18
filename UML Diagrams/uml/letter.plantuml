@@ -1,0 +1,36 @@
+@startuml Letter Class
+
+class Letter {
+  -words: std::vector<std::string>
+  -lettersAtBottom: std::vector<char>
+  -word: std::string
+  -current_word_index: int
+  -current_letter_index: int
+  -letter: char
+  -x: float
+  -y: float
+  -speed: float
+  -texture: SDL_Texture*
+  -width: int
+  -height: int
+  -renderer: SDL_Renderer*
+  -font: TTF_Font*
+
+  +Letter(index: int, startX: float, startY: float, velocity: float, renderer: SDL_Renderer*, font: TTF_Font*)
+  +~Letter()
+  +update_letter(time: float, screen_height: int, player1: User*, player2: User*, ball_pos_x: float, ball_pos_y: float, ball_radius: float): void
+  +render(renderer: SDL_Renderer*): void
+  +collision_check(ball_pos_x: float, ball_pos_y: float, ball_radius: float): bool
+  +next_letter(): void
+  +next_word(): void
+  +reset_word(n: int): void
+  +get_pos_x(): float
+  +get_pos_y(): float
+}
+
+class User {
+}
+
+Letter --> User: references
+
+@enduml
