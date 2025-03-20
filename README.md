@@ -546,6 +546,8 @@ Pour mieux structurer notre projet et assurer une architecture claire et mainten
 | Save         | ![Game Save](https://cdn.madebyvasilis.site/vscloud-connect/game-save-system.png) |
 | Sound        | ![Sound](https://cdn.madebyvasilis.site/vscloud-connect/soundeffects.png)         |
 | User         | ![User](https://cdn.madebyvasilis.site/vscloud-connect/user-class.png)            |
+| Letter       | ![Letter](https://cdn.madebyvasilis.site/group/Letter-Class.png)                  |
+| Balls        | ![Balls](https://cdn.madebyvasilis.site/group/Ball-Hierarchy.png)                 |
 
 Avec cette approche, chaque élément du jeu remplit un rôle bien défini et reste modulaire, ce qui permet d’ajouter de nouvelles fonctionnalités (comme le mode réseau) sans perturber l’ensemble du projet. Nous avons créé un diagramme UML pour les différentes dépendances entre les classes. De plus, les différentes notions de programmation utilisées dans chaque partie y sont indiquées.
 
