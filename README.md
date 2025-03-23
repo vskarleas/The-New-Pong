@@ -200,7 +200,7 @@ Ce n’est qu’une preuve de concept : rien ne vous empêche d’imaginer et 
 
 ### **Changement de la musique**
 
-Grâce à la bibliothèque SDL Mixer, nous pouvons gérer différents effets sonores et musiques avec des fonctions de fade-in et fade-out. Chaque mode peut ainsi avoir sa propre ambiance sonore, pour rendre l’expérience de jeu encore plus immersive.
+Grâce à la bibliothèque SDL Mixer, nous pouvons gérer différents effets sonores et musiques avec des fonctions de fade-in et fade-out.
 
 Voici l'implémentation:
 
@@ -245,7 +245,7 @@ Dans ce projet, toutes les fonctionnalités ont été implémentées sous la for
 
 Voici les différentes classes que nous avons définies :
 
-| Class                 | Description                                                                                                                                         | Fichier             |
+| Classes               | Description                                                                                                                                         | Fichier             |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
 | AI                    | Intelligence artificielle pour contrôler une raquette automatiquement                                                                              | ai.cpp              |
 | BallBase              | Classe de base abstraite pour tous les types de balles dans le jeu car nous proposons différents types de balles à choisir avant de lancer le jeu | ball_base.pp        |
@@ -490,9 +490,9 @@ Lors de nos cours, nous avons étudié l’utilisation de CTest pour organiser e
 
 ### Organisation des tests
 
-Le répertoire `b` contient son propre fichier `b`, qui permet de créer les exécutables de nos programmes de test afin de vérifier le bon fonctionnement de nos méthodes.
+Le répertoire `tests` contient son propre fichier `CmakeLists.txt`, qui permet de créer les exécutables de nos programmes de tests afin de vérifier le bon fonctionnement de nos méthodes.
 
-Chaque fichier `b` est un programme autonome pouvant être exécuté indépendamment. Si le test est réussi, il retourne 0. Cependant en cas d’échec, il renvoie une autre valeur avec des informations détaillées sur le problème rencontré.
+Chaque fichier `*_test.cpp` est un programme autonome pouvant être exécuté indépendamment. Si le test est réussi, il retourne 0. Cependant en cas d’échec, il renvoie une autre valeur avec des informations détaillées sur le problème rencontré.
 
 La réalisation des tests unitaires s’inscrit dans une démarche d’intégration continue, permettant de valider la non-régression du code tout au long du développement de notre jeu.
 
@@ -552,6 +552,10 @@ Pour mieux structurer notre projet et assurer une architecture claire et mainten
 Avec cette approche, chaque élément du jeu remplit un rôle bien défini et reste modulaire, ce qui permet d’ajouter de nouvelles fonctionnalités (comme le mode réseau) sans perturber l’ensemble du projet. Nous avons créé un diagramme UML pour les différentes dépendances entre les classes. De plus, les différentes notions de programmation utilisées dans chaque partie y sont indiquées.
 
 ![Dependecnies](https://cdn.madebyvasilis.site/vscloud-connect/game-dependencies.png)
+
+## Remarques
+
+L'architecture ARM ne permet pas d'utiliser 
 
 ## Conclusion
 
