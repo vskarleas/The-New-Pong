@@ -553,10 +553,6 @@ Avec cette approche, chaque élément du jeu remplit un rôle bien défini et re
 
 ![Dependecnies](https://cdn.madebyvasilis.site/vscloud-connect/game-dependencies.png)
 
-## Remarques
-
-L'architecture ARM ne permet pas d'utiliser 
-
 ## Conclusion
 
 **Pong, mais en mieux !** Notre projet revisite ce grand classique du jeu vidéo en exploitant pleinement les principes de la programmation orientée objet, nous permettant de créer un code modulaire, extensible et maintenable.
