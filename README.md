@@ -1,6 +1,6 @@
 # Projet Multijoueur en C++ : The New Pong
 
-** You can check out all the commits from the original repository at: [ROB4-S8-Cpp_Project](https://github.com/vskarleas/ROB4-S8-Cpp_Project) **
+**You can check out all the commits from the original repository at: [ROB4-S8-Cpp_Project](https://github.com/vskarleas/ROB4-S8-Cpp_Project)**
 
 ###### Auteurs: Dounia Bakalem, Yanis Sadoun, Vasileios Filippos Skarleas
 
