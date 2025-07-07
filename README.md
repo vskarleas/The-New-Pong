@@ -56,7 +56,7 @@ Pour démarrer le programme en mode automatique, suivez les étapes suivantes :
 
 ## Documentation
 
-Pour plus de détails sur la structure du projet et les commentaires (classes, fonctions, etc.), rendez-vous sur : [https://pong.madebyvasilis.site](https://pong.madebyvasilis.site/)
+Pour plus de détails sur la structure du projet et les commentaires (classes, fonctions, etc.), rendez-vous sur : [https://pong.dev.vskarleas.com](https://pong.dev.vskarleas.com/)
 
 ## Dépendances
 
